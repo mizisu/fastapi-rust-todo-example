@@ -1,26 +1,14 @@
 from fastapi import FastAPI
 
-import loader
-import users
-import todos
+from core import Loader
 
 app = FastAPI(title="TODO API")
 
-loader.load_apps([
-    "todos",
-])
+loader = Loader(
+    app,
+    prefix_path='/api/v1',
+)
 
-# app.include_router(users.router)
-# app.include_router(
-#     todos.router,
-#     prefix='/api/v1',
-#     tags=['Todos'],
-# )
-#
-# register_tortoise(
-#     app,
-#     db_url="sqlite://:memory:",
-#     modules={"models": ["users.models"]},
-#     generate_schemas=True,
-#     add_exception_handlers=True,
-# )
+loader.load_apps(
+    "todos",
+)
