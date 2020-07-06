@@ -9,6 +9,7 @@ class Todo(models.Model):
     timestamp_updated = fields.DatetimeField(auto_now=True)
 
 
+
 todo = pydantic_model_creator(Todo)
 todo_create = pydantic_model_creator(
     Todo,
