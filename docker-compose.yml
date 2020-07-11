@@ -2,17 +2,29 @@ version: "3.4"
 
 services:
   api:
+    hostname: api
     build:
       dockerfile: Dockerfile
       context: .
-    hostname: api
+    depends_on:
+      - db
 
   nginx:
-    image: nginx
     hostname: nginx
+    image: nginx
     volumes:
-    - ./nginx/app.conf:/etc/nginx/conf.d/app.conf
+      - ./nginx/app.conf:/etc/nginx/conf.d/app.conf
     ports:
       - "8000:8000"
     depends_on:
       - api
+
+  db:
+    hostname: db
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
