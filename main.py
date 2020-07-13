@@ -10,5 +10,6 @@ loader = Loader(
 )
 
 loader.load_apps(
+    "users",
     "todos",
 )
