@@ -16,13 +16,8 @@ def client() -> Generator:
         yield c
     finalizer()
 
-
-@pytest.fixture(scope="module")
-def event_loop(client: TestClient) -> Generator:
-    yield client.task.get_loop()
-
-
-def test_create_user(client: TestClient, event_loop: asyncio.AbstractEventLoop):  # nosec
+@pytest.mark.asyncio
+def test_create_user(client):
     response = client.post("/users", json={"username": "admin"})
     assert response.status_code == 200, response.text
     data = response.json()

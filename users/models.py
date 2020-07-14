@@ -2,7 +2,7 @@ from tortoise import fields, models
 from tortoise.contrib.pydantic import pydantic_model_creator
 
 
-class Users(models.Model):
+class User(models.Model):
     """
     The User model
     """
@@ -17,5 +17,4 @@ class Users(models.Model):
         exclude = ["password_hash"]
 
 
-user = pydantic_model_creator(Users)
-user_create = pydantic_model_creator(Users, exclude_readonly=True)
+UserCreateModel = pydantic_model_creator(User)
