@@ -3,10 +3,6 @@ from tortoise.contrib.pydantic import pydantic_model_creator
 
 
 class User(models.Model):
-    """
-    The User model
-    """
-
     id = fields.IntField(pk=True)
     username = fields.CharField(max_length=20, unique=True)
     password_hash = fields.CharField(max_length=128, null=True)
@@ -17,4 +13,9 @@ class User(models.Model):
         exclude = ["password_hash"]
 
 
-UserCreateModel = pydantic_model_creator(User)
+UserSignInRes = pydantic_model_creator(
+    User,
+    include=(
+        'id',
+    )
+)

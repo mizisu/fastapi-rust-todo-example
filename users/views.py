@@ -1,19 +1,13 @@
-from typing import List
-
-from fastapi import HTTPException, APIRouter
-from pydantic import BaseModel
-from tortoise.contrib.fastapi import HTTPNotFoundError
-
-from .models import User
+from fastapi import APIRouter
+from .models import User, UserSignInRes
 
 router = APIRouter()
 
 
-@router.post("/users")
+@router.post("/sign-in", status_code=201, response_model=UserSignInRes)
 async def sign_in(username: str, password: str):
-    user_obj = await User.create(
+    user = await User.create(
         username=username,
         password=password,
     )
-
-    return {}
+    return UserSignInRes.from_tortoise_orm(user)
