@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from tortoise import fields, models
 from tortoise.contrib.pydantic import pydantic_model_creator
 
@@ -11,6 +12,11 @@ class User(models.Model):
 
     class PydanticMeta:
         exclude = ["password_hash"]
+
+
+class UserSignInReq(BaseModel):
+    username: str
+    password: str
 
 
 UserSignInRes = pydantic_model_creator(

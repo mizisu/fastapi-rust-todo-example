@@ -1,13 +1,13 @@
 from fastapi import APIRouter
-from .models import User, UserSignInRes
+from .models import User, UserSignInRes, UserSignInReq
 
 router = APIRouter()
 
 
 @router.post("/sign-in", status_code=201, response_model=UserSignInRes)
-async def sign_in(username: str, password: str):
+async def sign_in(body: UserSignInReq):
     user = await User.create(
-        username=username,
-        password=password,
+        username=body.username,
+        password=body.password,
     )
-    return UserSignInRes.from_tortoise_orm(user)
+    return await UserSignInRes.from_tortoise_orm(user)
