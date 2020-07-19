@@ -45,9 +45,10 @@ class Loader:
 
     def _register_router(self):
         for router in self.routers:
+            prefix = os.path.join(self.prefix_path, router.module_name)
             self.app.include_router(
                 router.router,
-                prefix=self.prefix_path,
+                prefix=prefix,
                 tags=[router.module_name.capitalize()],
             )
 
