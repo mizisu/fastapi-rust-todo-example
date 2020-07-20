@@ -1,3 +1,4 @@
+import asyncio
 from typing import Generator
 
 import pytest
@@ -12,3 +13,8 @@ def client():
     with TestClient(app) as c:
         yield c
     finalizer()
+
+
+@pytest.fixture(scope="module")
+def event_loop(client: TestClient) -> Generator:
+    yield client.task.get_loop()
