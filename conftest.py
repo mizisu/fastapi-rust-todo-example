@@ -1,5 +1,5 @@
 import asyncio
-from typing import Generator
+from asyncio import AbstractEventLoop
 
 import pytest
 from fastapi.testclient import TestClient
@@ -16,5 +16,5 @@ def client():
 
 
 @pytest.fixture(scope="module")
-def event_loop(client: TestClient) -> Generator:
+def event_loop(client: TestClient) -> AbstractEventLoop:
     yield client.task.get_loop()
