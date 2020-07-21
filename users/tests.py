@@ -1,6 +1,3 @@
-import asyncio
-import pytest
-
 from core import status
 
 from .models import User
@@ -20,5 +17,4 @@ def test_sign_in(client, event_loop):
         return user
 
     r = event_loop.run_until_complete(get_user_by_db())
-    print("test")
-    print(r)
+    assert r.id == data['id']
