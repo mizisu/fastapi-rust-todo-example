@@ -1,4 +1,3 @@
-import asyncio
 from asyncio import AbstractEventLoop
 
 import pytest
@@ -7,7 +6,7 @@ from tortoise.contrib.test import finalizer, initializer
 from main import app
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def client():
     initializer(["users.models"])
     with TestClient(app) as c:
@@ -15,6 +14,6 @@ def client():
     finalizer()
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def event_loop(client: TestClient) -> AbstractEventLoop:
     yield client.task.get_loop()
