@@ -1,9 +1,22 @@
+import asyncio
+import functools
+
 from core import status
 
 from .models import User
 
 
-def test_sign_in(client, event_loop):
+def make_sync(func):
+    @functools.wraps(func)
+    def inner(**kwargs):
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(func(**kwargs))
+
+    return inner
+
+
+@make_sync
+async def test_sign_in(client):
     response = client.post("api/v1/users/sign-in", json={
         "username": "admin",
         "password": "password",
@@ -12,9 +25,5 @@ def test_sign_in(client, event_loop):
     data = response.json()
     assert "id" in data
 
-    async def get_user_by_db():
-        user = await User.get(id=data["id"])
-        return user
-
-    r = event_loop.run_until_complete(get_user_by_db())
-    assert r.id == data['id']
+    user = await User.get(id=data["id"])
+    assert user.id == data['id']
