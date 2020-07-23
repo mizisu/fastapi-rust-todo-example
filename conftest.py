@@ -6,6 +6,12 @@ from tortoise.contrib.test import finalizer, initializer
 from main import app
 
 
+@pytest.fixture(autouse=True)
+def nest():
+    import nest_asyncio
+    nest_asyncio.apply()
+
+
 @pytest.fixture(scope="function")
 def client():
     initializer(["users.models"])

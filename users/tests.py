@@ -1,18 +1,6 @@
-import asyncio
-import functools
-
-from core import status
+from core import *
 
 from .models import User
-
-
-def make_sync(func):
-    @functools.wraps(func)
-    def inner(**kwargs):
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(func(**kwargs))
-
-    return inner
 
 
 @make_sync
