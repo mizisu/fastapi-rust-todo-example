@@ -9,7 +9,7 @@ router = APIRouter()
 
 @router.post("/sign-in", status_code=201, response_model=UserSignInRes)
 async def sign_in(body: UserSignInReq):
-    new_user = services.create_user(
+    new_user = await services.create_user(
         body.username,
         body.password,
     )
