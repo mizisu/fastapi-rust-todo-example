@@ -19,6 +19,6 @@ def get_hash_password(password: str):
 async def login(username: str, password: str):
     user = User.get_or_none(username=username)
     if user is None:
-        raise 404
+        raise 403
 
     return bcrypt.checkpw(password, user.password)
