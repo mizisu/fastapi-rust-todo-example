@@ -23,3 +23,12 @@ def client():
 @pytest.fixture(scope="function")
 def event_loop(client: TestClient) -> AbstractEventLoop:
     yield client.task.get_loop()
+
+
+@pytest.fixture(scope="function")
+def user(event_loop):
+    from users import services
+    return event_loop.run_until_complete(services.create_user(
+        'test',
+        '1234'
+    ))

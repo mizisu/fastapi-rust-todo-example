@@ -15,3 +15,13 @@ async def test_sign_in(client):
 
     user = await User.get(id=data["id"])
     assert user.id == data['id']
+
+
+@make_sync
+async def test_login(client, user):
+    response = client.post("api/v1/users/login", json={
+        "username": "admin",
+        "password": "password",
+    })
+
+    print(response.status_code)

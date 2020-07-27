@@ -1,4 +1,6 @@
 import bcrypt
+from fastapi import HTTPException
+from core import status
 
 from .models import User
 
@@ -17,8 +19,11 @@ def get_hash_password(password: str):
 
 
 async def login(username: str, password: str):
-    user = User.get_or_none(username=username)
+    user = await User.get(username=username)
     if user is None:
-        raise 403
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED)
 
-    return bcrypt.checkpw(password, user.password)
+    if bcrypt.checkpw(password, user.password):
+        return user
+    else:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED)

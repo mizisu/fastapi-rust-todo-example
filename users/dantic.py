@@ -15,3 +15,8 @@ UserSignInRes = pydantic_model_creator(
         'id',
     )
 )
+
+
+class LoginJWTRes(BaseModel):
+    access: str
+    refresh: str
