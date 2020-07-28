@@ -2,7 +2,6 @@ from fastapi import APIRouter
 
 from . import services
 from .dantic import UserSignInReq, UserSignInRes, LoginJWTRes
-from .models import User
 
 router = APIRouter()
 

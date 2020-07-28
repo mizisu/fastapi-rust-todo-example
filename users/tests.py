@@ -20,8 +20,8 @@ async def test_sign_in(client):
 @make_sync
 async def test_login(client, user):
     response = client.post("api/v1/users/login", json={
-        "username": "admin",
-        "password": "password",
+        "username": user.username,
+        "password": user.raw_password,
     })
 
     print(response.status_code)

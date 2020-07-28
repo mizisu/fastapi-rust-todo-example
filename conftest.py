@@ -28,7 +28,9 @@ def event_loop(client: TestClient) -> AbstractEventLoop:
 @pytest.fixture(scope="function")
 def user(event_loop):
     from users import services
-    return event_loop.run_until_complete(services.create_user(
+    user = event_loop.run_until_complete(services.create_user(
         'test',
         '1234'
     ))
+    user.raw_password = '1234'
+    return user
