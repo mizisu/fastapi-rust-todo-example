@@ -1,5 +1,4 @@
-from core import *
-
+from testing import *
 from .models import User
 
 
