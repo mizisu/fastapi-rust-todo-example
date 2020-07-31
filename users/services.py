@@ -3,7 +3,9 @@ from datetime import datetime, timedelta
 import bcrypt
 import jwt
 from fastapi import HTTPException
-from core import status, settings
+
+import settings
+from core import status
 
 from .models import User
 

@@ -6,7 +6,7 @@ from .dantic import UserSignInRequest, UserSignInResponse, JWTLoginResponse
 router = APIRouter()
 
 
-@router.post("/sign-in", status_code=201, response_model=UserSignInRequest)
+@router.post("/sign-in", status_code=201, response_model=UserSignInResponse)
 async def sign_in(body: UserSignInRequest):
     new_user = await services.create_user(
         body.username,
