@@ -23,4 +23,6 @@ async def test_login(client, user):
         "password": user.raw_password,
     })
 
-    print(response.status_code)
+    assert response.status_code == status.HTTP_201_CREATED
+    data = response.json()
+    assert 'access' in data

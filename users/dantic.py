@@ -4,12 +4,12 @@ from tortoise.contrib.pydantic import pydantic_model_creator
 from .models import User
 
 
-class UserSignInReq(BaseModel):
+class UserSignInRequest(BaseModel):
     username: str
     password: str
 
 
-UserSignInRes = pydantic_model_creator(
+UserSignInResponse = pydantic_model_creator(
     User,
     include=(
         'id',
@@ -17,6 +17,5 @@ UserSignInRes = pydantic_model_creator(
 )
 
 
-class LoginJWTRes(BaseModel):
+class JWTLoginResponse(BaseModel):
     access: str
-    refresh: str
