@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from core import middleware
 
-app = FastAPI()
+app = FastAPI(title="TODO API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,8 +23,6 @@ app.add_middleware(
     BaseHTTPMiddleware,
     dispatch=middleware.authenticate
 )
-
-app = FastAPI(title="TODO API")
 
 loader = Loader(
     app,
