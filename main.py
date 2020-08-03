@@ -1,13 +1,10 @@
 import uvicorn
 from fastapi import FastAPI
-from starlette.middleware.base import BaseHTTPMiddleware
 
 import settings
 from core import Loader
 
 from fastapi.middleware.cors import CORSMiddleware
-
-from core import middleware
 
 app = FastAPI(title="TODO API")
 
@@ -17,11 +14,6 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-)
-
-app.add_middleware(
-    BaseHTTPMiddleware,
-    dispatch=middleware.authenticate
 )
 
 loader = Loader(

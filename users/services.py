@@ -29,11 +29,13 @@ def check_password(user: User, password: str) -> bool:
 
 
 def get_token(user: User) -> dict:
+    access_token = jwt.encode({
+        'user_id': user.id,
+        'exp': datetime.utcnow() + timedelta(days=1)
+    }, settings.SECRET_KEY)
+
     return {
-        'access': jwt.encode({
-            'user_id': user.id,
-            'exp': datetime.utcnow() + timedelta(days=1)
-        }, settings.SECRET_KEY)
+        'access': access_token.decode('UTF-8')
     }
 
 

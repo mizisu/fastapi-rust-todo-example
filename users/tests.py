@@ -26,3 +26,10 @@ async def test_login(client, user):
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
     assert 'access' in data
+
+
+@make_sync
+async def test(user_login_client):
+    response = user_login_client.get("api/v1/users/test")
+
+    assert response.status_code == status.HTTP_200_OK

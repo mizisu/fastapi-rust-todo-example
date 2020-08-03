@@ -1,9 +1,16 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Request
 
 from . import services
 from .dantic import UserSignInRequest, UserSignInResponse, JWTLoginResponse
 
 router = APIRouter()
+
+
+async def get_request_user(request: Request):
+    auth = request.headers.get('Authorization', '')
+    if auth.startswith('Bearer '):
+        token = auth[len('Bearer '):]
+    return None
 
 
 @router.post("/sign-in", status_code=201, response_model=UserSignInResponse)
@@ -21,3 +28,8 @@ async def login(body: UserSignInRequest):
         body.username,
         body.password,
     )
+
+
+@router.get('/test', status_code=200)
+async def asdf(user=Depends(get_request_user)):
+    pass

@@ -34,3 +34,11 @@ def user(event_loop):
     ))
     user.raw_password = '1234'
     return user
+
+
+@pytest.fixture(scope='function')
+def user_login_client(user, client):
+    from users import services
+    token = services.get_token(user)
+    client.headers['Authorization'] = f"Bearer {token['access']}"
+    return client
