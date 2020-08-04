@@ -29,7 +29,6 @@ async def test_login(client, user):
 
 
 @make_sync
-async def test(user_login_client):
-    response = user_login_client.get("api/v1/users/test")
-
+async def test_get_user_self(user_login_client):
+    response = user_login_client.get("api/v1/users/self")
     assert response.status_code == status.HTTP_200_OK

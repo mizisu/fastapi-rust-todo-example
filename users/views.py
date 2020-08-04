@@ -10,6 +10,12 @@ async def get_request_user(request: Request):
     auth = request.headers.get('Authorization', '')
     if auth.startswith('Bearer '):
         token = auth[len('Bearer '):]
+        import jwt
+        import settings
+        from users.models import User
+        decoded_token = jwt.decode(token, settings.SECRET_KEY)
+        user = await User.get(id=decoded_token['user_id'])
+        return user
     return None
 
 
@@ -30,6 +36,6 @@ async def login(body: UserSignInRequest):
     )
 
 
-@router.get('/test', status_code=200)
-async def asdf(user=Depends(get_request_user)):
-    pass
+@router.get('/self', status_code=200)
+async def get_user_self(user=Depends(get_request_user)):
+    return UserSignInResponse.from_tortoise_orm(user)

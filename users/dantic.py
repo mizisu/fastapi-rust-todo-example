@@ -19,3 +19,13 @@ UserSignInResponse = pydantic_model_creator(
 
 class JWTLoginResponse(BaseModel):
     access: str
+
+
+UserSelfResponse = pydantic_model_creator(
+    User,
+    include=(
+        'id',
+        'username',
+        'joined',
+    )
+)
