@@ -1,22 +1,23 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, HTTPException
+from starlette import status
 
 from . import services
-from .dantic import UserSignInRequest, UserSignInResponse, JWTLoginResponse
+from .dantic import UserSignInRequest, UserSignInResponse, JWTLoginResponse, UserSelfResponse
 
 router = APIRouter()
 
 
 async def get_request_user(request: Request):
     auth = request.headers.get('Authorization', '')
+    user = None
     if auth.startswith('Bearer '):
         token = auth[len('Bearer '):]
-        import jwt
-        import settings
-        from users.models import User
-        decoded_token = jwt.decode(token, settings.SECRET_KEY)
-        user = await User.get(id=decoded_token['user_id'])
+        user = await services.get_user_from_token(token)
+
+    if user is None:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED)
+    else:
         return user
-    return None
 
 
 @router.post("/sign-in", status_code=201, response_model=UserSignInResponse)
@@ -36,6 +37,6 @@ async def login(body: UserSignInRequest):
     )
 
 
-@router.get('/self', status_code=200)
+@router.get('/self', status_code=200, response_model=UserSelfResponse)
 async def get_user_self(user=Depends(get_request_user)):
-    return UserSignInResponse.from_tortoise_orm(user)
+    return await UserSelfResponse.from_tortoise_orm(user)
