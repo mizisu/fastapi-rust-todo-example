@@ -9,6 +9,9 @@ def _load_env():
 
 
 _load_env()
+BASEDIR = os.path.dirname(
+    os.path.abspath('./')
+)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 JWT_ALGORITHMS = 'HS256'
 ALLOW_ORIGINS = [

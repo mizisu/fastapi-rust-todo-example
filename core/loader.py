@@ -6,6 +6,8 @@ from typing import List
 from fastapi import FastAPI, APIRouter
 from tortoise.contrib.fastapi import register_tortoise
 
+import settings
+
 
 class Router:
     def __init__(self, module_name, router):
@@ -23,7 +25,8 @@ class Loader:
 
     def load_apps(self, *modules: str):
         for module_name in modules:
-            files = [Path(file).stem for file in os.listdir(module_name)]
+            module_path = os.path.join(settings.BASEDIR, module_name)
+            files = [Path(file).stem for file in os.listdir(module_path)]
             if 'models' in files:
                 self.models.append(f"{module_name}.models")
 

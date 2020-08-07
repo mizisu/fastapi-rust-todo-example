@@ -14,7 +14,7 @@ def nest():
 
 @pytest.fixture(scope="function")
 def client():
-    initializer(["users.models"])
+    initializer(["users.models", "todos.models"])
     with TestClient(app) as c:
         yield c
     finalizer()
