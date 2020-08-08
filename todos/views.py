@@ -6,6 +6,6 @@ from .models import Todo
 router = APIRouter()
 
 
-@router.get("/todos", response_model=TodoListResponse)
+@router.get("/")
 async def get_todos():
-    return await TodoListResponse.from_tortoise_orm(Todo.all())
+    return await TodoListResponse.from_queryset(Todo.all())

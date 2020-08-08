@@ -25,7 +25,7 @@ class Loader:
 
     def load_apps(self, *modules: str):
         for module_name in modules:
-            module_path = os.path.join(settings.BASEDIR, module_name)
+            module_path = os.path.join(settings.BASE_DIR, module_name)
             files = [Path(file).stem for file in os.listdir(module_path)]
             if 'models' in files:
                 self.models.append(f"{module_name}.models")
