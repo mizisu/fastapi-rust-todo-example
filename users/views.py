@@ -26,7 +26,7 @@ async def sign_in(body: UserSignInRequest):
         body.username,
         body.password,
     )
-    return await UserSignInResponse.from_tortoise_orm(new_user)
+    return await new_user
 
 
 @router.post('/login', status_code=201, response_model=JWTLoginResponse)
@@ -39,4 +39,4 @@ async def login(body: UserSignInRequest):
 
 @router.get('/self', status_code=200, response_model=UserSelfResponse)
 async def get_user_self(user=Depends(get_request_user)):
-    return await UserSelfResponse.from_tortoise_orm(user)
+    return await user

@@ -13,7 +13,7 @@ async def test_sign_in(client):
     assert "id" in data
 
     user = await User.get(id=data["id"])
-    assert user.id == data['id']
+    assert data['id'] == user.id
 
 
 @make_sync
@@ -29,9 +29,12 @@ async def test_login(client, user):
 
 
 @make_sync
-async def test_get_user_self(user_login_client):
+async def test_get_user_self(user_login_client, user):
     response = user_login_client.get("api/v1/users/self")
     assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert data['id'] == user.id
+    assert data['username'] == user.username
 
 
 @make_sync
