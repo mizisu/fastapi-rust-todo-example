@@ -19,6 +19,11 @@ impl Component for Login {
     }
 
     fn view(&self) -> Html {
-        html! { <span>{"Home Sweet Home!"}</span> }
+        html! {
+            <div>
+                <input placeholder="username"/>
+                <input placeholder="password" type="password"/>
+            </div>
+        }
     }
 }
