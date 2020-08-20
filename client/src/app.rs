@@ -1,7 +1,7 @@
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-use crate::pages::Login;
+use crate::pages::{Login, TodoList};
 use crate::route::Route;
 
 pub struct App {}
@@ -24,8 +24,8 @@ impl Component for App {
 
     fn view(&self) -> Html {
         let render = Router::render(|switch: Route| match switch {
-            Route::Login => html! {<Login/>},
-            Route::TodoList => html! {<Login />},
+            Route::Login => html! { <Login/> },
+            Route::TodoList => html! { <TodoList/> },
         });
 
         html! {
