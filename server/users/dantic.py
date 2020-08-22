@@ -26,6 +26,6 @@ UserSelfResponse = pydantic_model_creator(
     include=(
         'id',
         'username',
-        'joined',
+        'timestamp_created',
     )
 )
