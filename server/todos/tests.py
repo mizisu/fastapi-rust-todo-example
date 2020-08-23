@@ -37,3 +37,17 @@ async def test_get_todo(client):
     assert response.status_code == status.HTTP_200_OK
     item = response.json()
     assert item['content'] == todo.content
+
+
+@make_sync
+async def test_update_todo(client):
+    todo = await Todo.create(
+        content="adf",
+    )
+
+    response = client.patch(f'/api/v1/todos/{todo.id}', json={
+        'content': '1234',
+    })
+    assert response.status_code == status.HTTP_200_OK
+    todo = await Todo.get(id=todo.id)
+    assert todo.content == '1234'

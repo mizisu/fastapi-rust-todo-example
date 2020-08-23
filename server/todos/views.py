@@ -23,3 +23,11 @@ async def get_todos():
 async def get_todo(todo_id: int):
     todo = await Todo.get_or_none(id=todo_id)
     return todo
+
+
+@router.patch('/{todo_id}', response_model=TodoResponse)
+async def get_todo(todo_id: int, body: TodoCreateRequest):
+    todo = await Todo.get_or_none(id=todo_id)
+    todo.content = body.content
+    await todo.save()
+    return todo
