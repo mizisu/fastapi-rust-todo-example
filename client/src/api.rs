@@ -7,8 +7,10 @@ use yew::services::fetch::{FetchService, FetchTask, Request, Response};
 pub type FetchResponse<T> = Response<Json<Result<T, Error>>>;
 type FetchCallback<T> = Callback<FetchResponse<T>>;
 
-pub fn get_todos(callback: FetchCallback<Vec<Product>>) -> FetchTask {
-    let req = Request::get("localhost:8000/api/v1/todos/")
+const API_URL: str = "http://localhost:8000";
+
+pub fn get_todos(callback: FetchCallback<Vec<Todo>>) -> FetchTask {
+    let req = Request::get(format!("{}/api/v1/todos/", API_URL))
         .body(Nothing)
         .unwrap();
 
