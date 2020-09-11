@@ -1,4 +1,5 @@
 use yew::prelude::*;
+use crate::components::TextInput;
 
 struct Todo {
     id: i32,
@@ -46,6 +47,10 @@ impl Component for TodoList {
     }
 
     fn view(&self) -> Html {
-        html! { <span>{""}</span> }
+        return html! { 
+           <div>
+            <TextInput/>
+           </div>
+         };
     }
 }
