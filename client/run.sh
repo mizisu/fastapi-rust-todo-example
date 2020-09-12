@@ -1,0 +1,1 @@
+cargo make build & cargo make serve

@@ -29,7 +29,14 @@ impl Component for App {
         });
 
         html! {
-            <Router<Route, ()> render=render/>
+            <div>
+                <nav class="nav-extended">
+                <div class="nav-content center">
+                <span class="nav-title">{"Todo List"}</span>
+                </div>
+            </nav>
+                <Router<Route, ()> render=render/>
+            </div>
         }
     }
 }

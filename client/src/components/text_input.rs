@@ -29,7 +29,7 @@ impl Component for TextInput {
         <div class="row">
           <div class="input-field col s12">
             <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">{"Textarea"}</label>
+            <label for="textarea1">{"New Task"}</label>
           </div>
         </div>
       </form>

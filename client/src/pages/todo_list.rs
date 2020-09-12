@@ -48,7 +48,7 @@ impl Component for TodoList {
 
     fn view(&self) -> Html {
         return html! { 
-           <div>
+           <div class="container">
             <TextInput/>
            </div>
          };
