@@ -1,5 +1,6 @@
-use yew::prelude::*;
 use crate::components::TextInput;
+use crate::components::TodoList;
+use yew::prelude::*;
 
 struct Todo {
     id: i32,
@@ -11,11 +12,11 @@ struct State {
     todos: Vec<Todo>,
 }
 
-pub struct TodoList {
+pub struct TodoListWrap {
     state: State,
 }
 
-impl Component for TodoList {
+impl Component for TodoListWrap {
     type Message = ();
     type Properties = ();
 
@@ -47,10 +48,11 @@ impl Component for TodoList {
     }
 
     fn view(&self) -> Html {
-        return html! { 
-           <div class="container">
-            <TextInput/>
-           </div>
-         };
+        return html! {
+          <div class="container">
+           <TextInput/>
+           <TodoList/>
+          </div>
+        };
     }
 }
