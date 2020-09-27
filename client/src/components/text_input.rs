@@ -1,5 +1,5 @@
 use yew::prelude::*;
-use yew::events::{Event, InputData};
+use yew::events::{Event, ChangeData};
 use yew::services::ConsoleService;
 
 pub enum Msg {
@@ -33,6 +33,7 @@ impl Component for TextInput {
       },
       Msg::ValueUpdate(value) => {
         self.state.value = value;
+        ConsoleService::log(&format!("{}", &self.state.value));
       }
     }
 
@@ -50,17 +51,18 @@ impl Component for TextInput {
     });
 
     html! {
-    <div class="row">
-      <form class="col s12" onsubmit=onsubmit>
-        <div class="row">
-          <div class="input-field col s12">
-          <input id="todo" type="text" class="validate" 
-                 value=&self.state.value
-                 oninput=self.link.callback(|e : InputData| Msg::ValueUpdate(e.value))
-           />
-          <label for="todo">{"New Task"}</label>
-          </div>
-        </div>
+    <div class="mt-8">
+      <form onsubmit=onsubmit>
+        <label class="block text-indigo-100 text-lg font-bold mb-2" for="task">
+        {"Task"}
+      </label>
+      <input 
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="task"
+          type="text"
+          placeholder="Input some task and press enter"
+          oninput=self.link.callback(|e: InputData| Msg::ValueUpdate(e.value))
+        />
       </form>
     </div>
     }

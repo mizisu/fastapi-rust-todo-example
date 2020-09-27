@@ -1,7 +1,7 @@
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-use crate::pages::{Login, TodoListWrap};
+use crate::pages::{Login, TodoListPage};
 use crate::route::Route;
 
 pub struct App {}
@@ -25,17 +25,17 @@ impl Component for App {
     fn view(&self) -> Html {
         let render = Router::render(|switch: Route| match switch {
             Route::Login => html! { <Login/> },
-            Route::TodoList => html! { <TodoListWrap/> },
+            Route::TodoList => html! { <TodoListPage/> },
         });
 
         html! {
-            <div>
-                <nav class="nav-extended">
-                <div class="nav-content center">
-                <span class="nav-title">{"Todo List"}</span>
+            <div class="m-auto">
+                <nav>
+                    <h1 class="uppercase text-4xl text-center mt-12 font-bold text-indigo-100" >{"Rust Todo List"}</h1>
+                </nav>
+                <div class="p-8 w-8/12 m-auto">
+                    <Router<Route, ()> render=render/>
                 </div>
-            </nav>
-                <Router<Route, ()> render=render/>
             </div>
         }
     }

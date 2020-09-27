@@ -12,11 +12,11 @@ struct State {
     todos: Vec<Todo>,
 }
 
-pub struct TodoListWrap {
+pub struct TodoListPage {
     state: State,
 }
 
-impl Component for TodoListWrap {
+impl Component for TodoListPage {
     type Message = ();
     type Properties = ();
 
