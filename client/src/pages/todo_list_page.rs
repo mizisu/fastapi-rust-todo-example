@@ -49,7 +49,7 @@ impl Component for TodoListPage {
 
     fn view(&self) -> Html {
         return html! {
-          <div class="container">
+          <div class="p-8 m-auto w-8/12 max-w-2xl">
            <TextInput/>
            <TodoList/>
           </div>

@@ -33,7 +33,7 @@ impl Component for App {
                 <nav>
                     <h1 class="uppercase text-4xl text-center mt-12 font-bold text-indigo-100" >{"Rust Todo List"}</h1>
                 </nav>
-                <div class="p-8 w-8/12 m-auto">
+                <div>
                     <Router<Route, ()> render=render/>
                 </div>
             </div>
