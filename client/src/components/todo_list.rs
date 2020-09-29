@@ -33,10 +33,11 @@ impl Component for TodoList {
     }
 
     fn view(&self) -> Html {
-        html! {
-        <div class="row mt-8">
-            <div class="col s12">
-                <div class="shadow-lg bg-indigo-400 rounded">
+        let items = ["item1", "item2"];
+
+        let rendered_items = items.iter().map(|item| {
+            html! {
+                <div class="shadow-lg bg-indigo-400 rounded mt-3">
                     <label class="items-center flex h-12">
                         <input type="checkbox" class="form-checkbox h-6 w-6 mt-1 ml-3 rounded"/>
                         <span class="ml-4 text-xl">{"adf"}</span>
@@ -45,6 +46,13 @@ impl Component for TodoList {
                         </button>
                     </label>
                 </div>
+            }
+        }).collect::<Html>();
+
+        html! {
+        <div class="row mt-8">
+            <div class="col s12">
+                {rendered_items}
             </div>
         </div>
         }
