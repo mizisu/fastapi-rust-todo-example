@@ -1,6 +1,6 @@
 asynctest==0.13.0
 bcrypt==3.1.7
-fastapi==0.58.0
+fastapi==0.65.2
 tortoise-orm==0.16.13
 uvicorn==0.11.8
 pytest==5.4.3
