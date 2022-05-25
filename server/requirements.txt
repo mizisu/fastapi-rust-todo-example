@@ -4,7 +4,7 @@ fastapi==0.65.2
 tortoise-orm==0.16.13
 uvicorn==0.11.8
 pytest==5.4.3
-pyjwt==1.7.1
+pyjwt==2.4.0
 python-dotenv==0.14.0
 requests==2.24.0
 nest-asyncio==1.4.0
